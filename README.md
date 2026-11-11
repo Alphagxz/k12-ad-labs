@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# K12 Ad Labs — Website
 
-## Getting Started
+Premium, cinematic agency site for K12 Ad Labs.
+**Stack:** Next.js (App Router) · React · TypeScript · Tailwind CSS · GSAP + ScrollTrigger · Lenis.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run build && npm start   # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Updating content (no component code needed)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Everything editable lives in `src/config/`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| File | What it controls |
+| --- | --- |
+| `site.ts` | Headline, description, hero background video, showreel order, **email, enquiry link, form endpoint, social links**, navigation |
+| `portfolio.ts` | **Featured videos** (title, brand, category, video URL, thumbnail) and **Google Drive folder links** (View All Projects + per-brand folders) |
+| `content.ts` | Intro copy, services, client list, About, case studies |
 
-## Learn More
+Edit → commit → push. Vercel redeploys automatically in about a minute.
 
-To learn more about Next.js, take a look at the following resources:
+### Adding a portfolio video
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. In Google Drive, share the **video file**: *General access → Anyone with the link → Viewer*.
+2. Paste the link as `videoUrl` in `portfolio.ts`. Any Drive file link format works. Direct `.mp4` URLs, YouTube and Vimeo also work.
+3. Thumbnail: put an image in `public/media/` and set `thumbnailUrl: "/media/your-file.jpg"`. If left empty, Drive videos use Drive's automatic thumbnail.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Notes:
+- A Drive **folder** link is not a video link — folder links go in `driveFolders`.
+- Drive videos play inside Google's embedded player (its own play/volume controls). Direct `.mp4` files get the site's custom play/pause and mute controls. For the showreel, direct files hosted on a CDN give the most polished result.
+- Videos load only when a visitor presses play, so the page stays fast and no video files live in this repo.
+- The hero background needs a direct video file (`site.hero.videoUrl`); Drive cannot autoplay as a background. Until then a generated light backdrop is shown.
 
-## Deploy on Vercel
+### Placeholders
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Anything not yet supplied renders as a clearly labelled placeholder frame ("… placeholder · replace in config") or a "pending" note. Search the config files for `TODO` to see everything outstanding. Case studies marked `draft: true` show a "Draft — content pending" tag and are hidden from search engines.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Contact form
+
+Set `contact.formEndpoint` in `site.ts` to a [Formspree](https://formspree.io) form URL (free tier is fine) and submissions arrive in your inbox. Without it, the form opens the visitor's email app addressed to `contact.email`.
+
+## Deploy to Vercel
+
+1. Push this folder to a GitHub repository.
+2. Go to <https://vercel.com/new>, import the repository, keep the defaults (framework: Next.js) and click **Deploy**.
+3. To reuse the old address, open the Vercel project → Settings → Domains and add `k12-ad-labs.vercel.app` (or your custom domain), then update `site.url` in `src/config/site.ts`.
+
+No environment variables are required.
+
+## Accessibility & performance
+
+- Honors `prefers-reduced-motion`: smooth scroll, pinning and reveals are disabled and content is shown statically.
+- Custom cursor and magnetic buttons only on mouse devices.
+- All pages are statically generated.
