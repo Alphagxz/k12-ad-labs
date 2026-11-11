@@ -84,7 +84,6 @@ export const clients: { name: string; logoUrl?: string }[] = [
   { name: "MoneyPilot" },
   { name: "Cheater Scanner" },
   { name: "Social Catfish" },
-  { name: "TripSniper" },
   { name: "CardOutpost" },
   { name: "DeepScan" },
   { name: "Videshi Coffee" },
