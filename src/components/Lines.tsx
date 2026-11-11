@@ -1,3 +1,8 @@
+/** Renders *accent* markup as an italic serif word. */
+function accent(text: string) {
+  return text.split("*").map((part, i) => (i % 2 ? <em key={i}>{part}</em> : part));
+}
+
 /** Headline split into masked lines; animated by ScrollFX (or Hero). */
 export default function Lines({
   lines,
@@ -12,10 +17,10 @@ export default function Lines({
   manual?: boolean;
 }) {
   return (
-    <Tag className={className} {...(manual ? {} : { "data-lines": "" })} aria-label={lines.join(" ")}>
+    <Tag className={className} {...(manual ? {} : { "data-lines": "" })} aria-label={lines.join(" ").replaceAll("*", "")}>
       {lines.map((l, i) => (
         <span key={i} className="line-mask" aria-hidden>
-          <span className="line-inner">{l}</span>
+          <span className="line-inner">{accent(l)}</span>
         </span>
       ))}
     </Tag>

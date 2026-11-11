@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif, Inter_Tight } from "next/font/google";
 import "./globals.css";
 import { site } from "@/config/site";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -12,17 +12,20 @@ import { VideoProvider } from "@/components/VideoModal";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
-const display = Anton({ variable: "--font-display", weight: "400", subsets: ["latin"] });
+const display = Inter_Tight({ variable: "--font-display", weight: ["500", "600", "700"], subsets: ["latin"] });
 const serif = Instrument_Serif({ variable: "--font-serif", weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — AI Ads That Don't Look Like AI`,
+    default: `${site.name} — Creative Production Studio`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   keywords: [
+    "creative production studio",
+    "brand films",
+    "commercial production",
     "AI advertising agency",
     "AI UGC",
     "AI commercials",
@@ -35,24 +38,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name} — AI Ads That Don't Look Like AI`,
-    description: site.subheadline,
+    title: `${site.name} — Creative Production Studio`,
+    description: site.description,
     url: site.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — AI Ads That Don't Look Like AI`,
-    description: site.subheadline,
+    title: `${site.name} — Creative Production Studio`,
+    description: site.description,
   },
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0a" };
+export const viewport: Viewport = { themeColor: "#f5f4f9" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${display.variable} ${serif.variable}`}>
       <body>
+        <div className="ambient" aria-hidden>
+          <span /><span /><span /><span />
+        </div>
         <VideoProvider>
           <SmoothScroll />
           <Preloader />

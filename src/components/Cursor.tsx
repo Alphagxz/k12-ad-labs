@@ -50,7 +50,7 @@ export default function Cursor() {
     <div
       ref={dot}
       aria-hidden
-      className="pointer-events-none fixed left-0 top-0 z-[90] hidden h-24 w-24 scale-0 items-center justify-center rounded-full bg-accent text-ink [@media(hover:hover)_and_(pointer:fine)]:flex"
+      className="pointer-events-none fixed left-0 top-0 z-[90] hidden h-24 w-24 scale-0 items-center justify-center rounded-full bg-accent text-white [@media(hover:hover)_and_(pointer:fine)]:flex"
     >
       <span ref={text} className="font-mono text-[0.6875rem] uppercase tracking-[0.14em]" />
     </div>

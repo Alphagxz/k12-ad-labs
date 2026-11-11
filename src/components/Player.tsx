@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/config/portfolio";
-import { aspectClass, resolveThumbnail, resolveVideo } from "@/lib/video";
+import { aspectClass, projectAspect, resolveThumbnail, resolveVideo } from "@/lib/video";
 import Media from "./Media";
 import { PauseIcon, PlayIcon, SoundOffIcon, SoundOnIcon } from "./Icons";
 
@@ -10,7 +10,6 @@ import { PauseIcon, PlayIcon, SoundOffIcon, SoundOnIcon } from "./Icons";
  * One player for every video on the site.
  *  • Direct files (.mp4/.webm) → native <video> with custom play / mute controls.
  *  • Google Drive / YouTube / Vimeo → embedded player (their own controls).
- *  • No link yet → marked placeholder.
  * Nothing is loaded until the visitor presses play.
  */
 export default function Player({
@@ -25,7 +24,7 @@ export default function Player({
   className?: string;
 }) {
   const video = resolveVideo(project.videoUrl);
-  const thumb = resolveThumbnail(project.thumbnailUrl, project.videoUrl);
+  const thumb = resolveThumbnail(project);
   const [started, setStarted] = useState(autoStart && video.kind !== "none");
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -50,24 +49,21 @@ export default function Player({
   const label = `${project.brand} — ${project.title}`;
 
   return (
-    <div className={`relative overflow-hidden rounded-md bg-black ${aspectClass[project.aspect ?? "9:16"]} ${className}`}>
+    <div className={`relative overflow-hidden rounded-2xl bg-black shadow-[0_30px_80px_-30px_rgb(30_20_80/0.55)] ${aspectClass[projectAspect(project)]} ${className}`}>
       {!started && (
         <button
           type="button"
           onClick={() => video.kind !== "none" && setStarted(true)}
           disabled={video.kind === "none"}
-          aria-label={video.kind === "none" ? `${label} — video not added yet` : `Play ${label}`}
+          aria-label={`Play ${label}`}
           data-cursor={video.kind === "none" ? undefined : "PLAY"}
           className="group absolute inset-0 block h-full w-full"
         >
-          <Media src={thumb} alt={label} index={index} note="Thumbnail placeholder" className="absolute inset-0 h-full w-full" sizes="(min-width: 1024px) 40vw, 90vw" />
-          <span className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-black/0" />
-          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-bone text-ink transition-transform duration-500 ease-out group-hover:scale-110 group-disabled:bg-white/15 group-disabled:text-white/60">
+          <Media src={thumb} alt={label} title={project.brand} subtitle={project.title} index={index} className="absolute inset-0 h-full w-full" sizes="(min-width: 1024px) 40vw, 90vw" />
+          <span className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/0" />
+          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/80 bg-white/70 text-bone shadow-xl backdrop-blur-md transition-transform duration-500 ease-out group-hover:scale-110">
             <PlayIcon className="h-6 w-6 translate-x-0.5" />
           </span>
-          {video.kind === "none" && (
-            <span className="label absolute inset-x-0 bottom-5 text-center !text-white/70">Video link pending</span>
-          )}
         </button>
       )}
 
@@ -87,10 +83,10 @@ export default function Player({
             className="absolute inset-0 h-full w-full object-contain"
           />
           <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent p-4">
-            <button type="button" onClick={toggle} aria-label={paused ? "Play" : "Pause"} className="flex h-11 w-11 items-center justify-center rounded-full bg-bone text-ink">
+            <button type="button" onClick={toggle} aria-label={paused ? "Play" : "Pause"} className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-bone">
               {paused ? <PlayIcon className="h-4 w-4 translate-x-px" /> : <PauseIcon className="h-4 w-4" />}
             </button>
-            <button type="button" onClick={() => setMuted((m) => !m)} aria-label={muted ? "Unmute" : "Mute"} aria-pressed={muted} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-bone backdrop-blur-sm">
+            <button type="button" onClick={() => setMuted((m) => !m)} aria-label={muted ? "Unmute" : "Mute"} aria-pressed={muted} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/50 text-white backdrop-blur-sm">
               {muted ? <SoundOffIcon className="h-5 w-5" /> : <SoundOnIcon className="h-5 w-5" />}
             </button>
           </div>

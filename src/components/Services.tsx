@@ -2,9 +2,17 @@
 
 import { useRef, useState } from "react";
 import { services } from "@/config/content";
+import { featuredProjects } from "@/config/portfolio";
 import { ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { resolveThumbnail } from "@/lib/video";
 import Lines from "./Lines";
 import Media from "./Media";
+
+const visual = (projectId: string, imageUrl: string) => {
+  if (imageUrl) return imageUrl;
+  const p = featuredProjects.find((x) => x.id === projectId);
+  return p ? resolveThumbnail(p) : "";
+};
 
 export default function Services() {
   const root = useRef<HTMLElement>(null);
@@ -24,45 +32,52 @@ export default function Services() {
       <div className="mb-16 flex flex-col justify-between gap-6 md:mb-24 md:flex-row md:items-end">
         <div>
           <p className="label mb-4">(05) — Services</p>
-          <Lines lines={["What we", "produce."]} className="display display-lg" />
+          <Lines lines={["Everything a", "brand needs *on screen.*"]} className="display display-lg" />
         </div>
         <p data-reveal className="max-w-sm text-lg leading-relaxed text-mute">
-          One production partner for every format a modern brand needs — from a single hero film to hundreds of variations.
+          One production partner for every format — from a single hero film to hundreds of variations.
         </p>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="hidden lg:col-span-5 lg:block">
-          <div className="sticky top-24 aspect-[4/5] max-h-[76vh] overflow-hidden rounded-md">
-            {services.map((s, i) => (
-              <div
-                key={s.title}
-                className="absolute inset-0 transition-[opacity,transform,clip-path] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                style={{
-                  opacity: i === active ? 1 : 0,
-                  transform: i === active ? "scale(1)" : "scale(1.08)",
-                  clipPath: i <= active ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
-                }}
-                aria-hidden={i !== active}
-              >
-                <Media src={s.imageUrl} alt={s.title} index={i + 2} note="Service visual placeholder" className="h-full w-full" sizes="40vw" />
-              </div>
-            ))}
-            <p className="label absolute bottom-4 left-4 z-10 !text-bone">
-              {String(active + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
-            </p>
+          <div className="glass sticky top-28 rounded-[2rem] p-2.5">
+            <div className="relative aspect-[4/5] max-h-[70vh] w-full overflow-hidden rounded-3xl">
+              {services.map((s, i) => (
+                <div
+                  key={s.title}
+                  className="absolute inset-0 transition-[opacity,transform,clip-path] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  style={{
+                    opacity: i === active ? 1 : 0,
+                    transform: i === active ? "scale(1)" : "scale(1.08)",
+                    clipPath: i <= active ? "inset(0 0 0 0)" : "inset(100% 0 0 0)",
+                  }}
+                  aria-hidden={i !== active}
+                >
+                  <Media src={visual(s.projectId, s.imageUrl)} alt={s.title} title={s.title} subtitle={s.tags.join(" · ")} index={i + 2} className="h-full w-full" sizes="40vw" />
+                </div>
+              ))}
+              <p className="glass-soft chip absolute bottom-4 left-4 z-10">
+                {String(active + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")} · {services[active].title}
+              </p>
+            </div>
           </div>
         </div>
 
-        <ol className="lg:col-span-6 lg:col-start-7">
+        <ol className="space-y-4 lg:col-span-6 lg:col-start-7">
           {services.map((s, i) => (
-            <li key={s.title} className={`svc-item border-t border-line py-9 transition-opacity duration-500 last:border-b lg:py-14 ${i === active ? "lg:opacity-100" : "lg:opacity-35"}`}>
-              <div className="flex gap-6">
-                <span className="label w-8 pt-2">0{i + 1}</span>
+            <li key={s.title} className={`svc-item glass rounded-3xl p-6 transition-opacity duration-500 md:p-9 ${i === active ? "lg:opacity-100" : "lg:opacity-55"}`}>
+              <div className="flex gap-5">
+                <span className="label w-7 pt-2 !text-accent">0{i + 1}</span>
                 <div className="flex-1">
-                  <h3 className="display text-[clamp(2rem,4.2vw,4rem)]">{s.title}</h3>
+                  <h3 className="display text-[clamp(1.7rem,3vw,2.9rem)]">{s.title}</h3>
                   <p className="mt-4 max-w-md leading-relaxed text-mute">{s.description}</p>
-                  <Media src={s.imageUrl} alt={s.title} index={i + 2} note="Service visual placeholder" className="mt-6 aspect-[16/10] rounded-md lg:hidden" sizes="90vw" />
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {s.tags.map((t) => (
+                      <li key={t} className="chip border border-line bg-white/50">{t}</li>
+                    ))}
+                  </ul>
+                  <Media src={visual(s.projectId, s.imageUrl)} alt={s.title} title={s.title} index={i + 2} className="mt-6 aspect-[16/10] rounded-2xl lg:hidden" sizes="90vw" />
                 </div>
               </div>
             </li>

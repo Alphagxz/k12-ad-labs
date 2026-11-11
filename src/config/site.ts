@@ -1,62 +1,56 @@
 /**
  * ─────────────────────────────────────────────────────────────
  *  K12 AD LABS — SITE CONFIGURATION
- *  Brand copy, contact details, social links, hero + showreel.
+ *  Brand copy, contact details, social links, hero.
  *  Edit this file, commit, push → Vercel redeploys automatically.
- *
- *  Anything left as an empty string "" is treated as "not supplied
- *  yet": the site hides it or shows a clearly marked placeholder.
  * ─────────────────────────────────────────────────────────────
  */
 
 export const site = {
   name: "K12 Ad Labs",
-  url: "https://k12-ad-labs.vercel.app", // TODO: update if you use a custom domain
-  headline: ["AI ADS THAT", "DON'T LOOK LIKE AI."],
-  subheadline: "Premium AI Advertising for Modern Brands.",
+  url: "https://k12-ad-labs.vercel.app", // update if you use a custom domain
+  /** Hero headline, one entry per line. Wrap a word in *asterisks* for the serif accent. */
+  headline: ["We make brands", "worth *watching.*"],
+  eyebrow: "Creative production studio",
+  subheadline:
+    "Brand films, commercials, social content and AI-powered advertising — produced end to end, from the first idea to the final cut.",
   description:
-    "K12 Ad Labs is an AI-first creative production agency producing premium AI advertisements, realistic AI UGC, product commercials, social creatives and performance advertising for modern brands.",
+    "K12 Ad Labs is a creative production studio making brand films, commercials, product films, social content and AI-powered advertising for modern brands.",
 
-  /** Figures carried over from the previous K12 Ad Labs website. */
+  /** Figure carried over from the previous K12 Ad Labs website. */
   stats: [{ value: "50+", label: "Ads produced" }],
 
   hero: {
     /**
-     * Background video for the hero. Must be a DIRECT video file
-     * (e.g. "/media/hero.mp4" in /public, or a CDN .mp4/.webm URL).
-     * Google Drive links cannot autoplay as a silent background.
-     * Leave "" to use the built-in animated light backdrop.
+     * Optional background video for the hero. Must be a DIRECT video
+     * file ("/media/hero.mp4" in /public or a CDN .mp4/.webm URL).
+     * Leave "" to use the built-in animated backdrop.
      */
     videoUrl: "",
     posterUrl: "",
+    /** Project ids (portfolio.ts) shown as the floating cards in the hero. */
+    cardProjectIds: ["soch", "pet-project", "trunativ"],
   },
-
 } as const;
 
 export const contact = {
-  /** TODO: replace with the real business email. */
-  email: "",
+  email: "garciaalpha007@gmail.com",
+  /** "Start a project" link — currently WhatsApp. Any URL works (Calendly, Typeform…). */
+  enquiryUrl:
+    "https://wa.me/919074512437?text=Hi%20K12%20Ad%20Labs%2C%20I%27d%20like%20to%20discuss%20a%20project.",
+  enquiryLabel: "WhatsApp",
   /**
-   * Project enquiry link (Calendly, Typeform, Google Form, WhatsApp…).
-   * Leave "" to make enquiry buttons scroll to the contact form.
+   * Contact form endpoint (JSON POST). Uses FormSubmit, which emails
+   * each enquiry to the address in the URL. Swap for Formspree or any
+   * other endpoint if preferred.
    */
-  enquiryUrl: "",
-  /**
-   * Contact form endpoint. Works out of the box with Formspree
-   * (https://formspree.io → create a form → paste its URL here,
-   * e.g. "https://formspree.io/f/abcdwxyz") or any endpoint that
-   * accepts a JSON POST. Leave "" and the form opens the visitor's
-   * email app addressed to `email` instead.
-   */
-  formEndpoint: "",
+  formEndpoint: "https://formsubmit.co/ajax/garciaalpha007@gmail.com",
 };
 
 /** Social links. Empty entries are hidden. */
 export const socials: { label: string; url: string }[] = [
-  { label: "Instagram", url: "" },
-  { label: "LinkedIn", url: "" },
-  { label: "YouTube", url: "" },
-  { label: "X / Twitter", url: "" },
+  { label: "Instagram", url: "https://www.instagram.com/gokulgxz/" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/gokul-das-k-m-728795348/" },
 ];
 
 export const nav = [

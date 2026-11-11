@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="shell border-t border-line py-8">
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <p className="label">© {new Date().getFullYear()} {site.name}. AI-first creative production.</p>
+        <p className="label">© {new Date().getFullYear()} {site.name}. Creative production studio.</p>
         <ul className="flex flex-wrap gap-x-6 gap-y-2">
           {nav.map((n) => (
             <li key={n.href}>

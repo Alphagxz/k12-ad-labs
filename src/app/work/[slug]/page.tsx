@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { caseStudies } from "@/config/content";
 import { featuredProjects } from "@/config/portfolio";
-import { resolveThumbnail } from "@/lib/video";
+import { projectAspect, resolveThumbnail } from "@/lib/video";
 import Lines from "@/components/Lines";
 import Media from "@/components/Media";
 import Player from "@/components/Player";
@@ -36,7 +36,7 @@ export default async function CaseStudyPage({ params }: Props) {
   const pIndex = featuredProjects.findIndex((p) => p.id === c.projectId);
   const project = featuredProjects[pIndex];
   const next = caseStudies[(i + 1) % caseStudies.length];
-  const cover = c.images[0] || (project ? resolveThumbnail(project.thumbnailUrl, project.videoUrl) : "");
+  const cover = c.images[0] || (project ? resolveThumbnail(project) : "");
 
   const blocks = [
     { label: "The brand", text: c.introduction },
@@ -50,15 +50,19 @@ export default async function CaseStudyPage({ params }: Props) {
         <div className="mb-6 flex flex-wrap items-center gap-4">
           <Link href="/#case-studies" className="ulink label !text-bone">← All case studies</Link>
           <span className="label">Case 0{i + 1} — {c.category}</span>
-          {c.draft && <span className="label border border-accent/60 px-2 py-1 !text-accent">Draft — content pending</span>}
+          {c.draft && <span className="chip border border-accent/60 !text-accent">Draft</span>}
         </div>
         <Lines as="h1" lines={[c.brand]} className="display display-xl" />
       </header>
 
-      <div className="relative h-[60svh] overflow-hidden md:h-[85svh]">
+      <div className="shell">
+      <div className="glass rounded-[2rem] p-2.5">
+      <div className="relative h-[56svh] overflow-hidden rounded-3xl md:h-[78svh]">
         <div data-parallax="0.1" className="absolute -inset-y-[12%] inset-x-0">
-          <Media src={cover} alt={`${c.brand} — cover`} index={i + 4} note="Cover image placeholder" className="h-full w-full" sizes="100vw" priority />
+          <Media src={cover} alt={`${c.brand} — cover`} title={c.brand} subtitle={c.category} index={i + 4} className="h-full w-full" sizes="100vw" priority />
         </div>
+      </div>
+      </div>
       </div>
 
       <section className="shell py-24 md:py-36">
@@ -73,7 +77,7 @@ export default async function CaseStudyPage({ params }: Props) {
       {c.process.length > 0 && (
       <section className="shell border-t border-line py-24 md:py-36">
         <p className="label mb-4">Production process</p>
-        <Lines lines={["How it", "was made."]} className="display display-lg" />
+        <Lines lines={["How it", "was *made.*"]} className="display display-lg" />
         <ol className="mt-16 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
           {c.process.map((s, k) => (
             <li key={s.title} data-reveal className="border-t border-line py-7">
@@ -87,15 +91,15 @@ export default async function CaseStudyPage({ params }: Props) {
       )}
 
       {project && (
-        <section className="bg-ash py-24 md:py-36">
+        <section className="border-y border-white/80 bg-white/45 py-24 backdrop-blur-2xl md:py-36">
           <div className="shell grid items-center gap-12 md:grid-cols-12">
             <div className="md:col-span-5">
               <p className="label mb-4">Final film</p>
-              <Lines lines={["The", "result."]} className="display display-lg" />
+              <Lines lines={["The", "*film.*"]} className="display display-lg" />
               <p data-reveal className="mt-8 text-mute">{project.brand} — {project.title}<br />{project.category}</p>
             </div>
             <div data-reveal className="flex justify-center md:col-span-6 md:col-start-7">
-              <Player project={project} index={pIndex} className={(project.aspect ?? "9:16") === "16:9" ? "w-full" : "h-[78svh] max-w-full"} />
+              <Player project={project} index={pIndex} className={projectAspect(project) === "16:9" ? "w-full" : "h-[78svh] max-w-full"} />
             </div>
           </div>
         </section>
@@ -110,8 +114,8 @@ export default async function CaseStudyPage({ params }: Props) {
                 <Media
                   src={src}
                   alt={`${c.brand} — frame ${k + 1}`}
+                  title={c.brand}
                   index={i + k + 1}
-                  note="Supporting image placeholder"
                   className={`rounded-md ${k % 3 === 2 ? "aspect-[21/9]" : "aspect-[4/5]"}`}
                   sizes="(min-width: 768px) 55vw, 92vw"
                 />

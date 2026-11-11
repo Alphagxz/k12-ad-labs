@@ -26,22 +26,28 @@ Edit → commit → push. Vercel redeploys automatically in about a minute.
 ### Adding a portfolio video
 
 1. In Google Drive, share the **video file**: *General access → Anyone with the link → Viewer*.
-2. Paste the link as `videoUrl` in `portfolio.ts`. Any Drive file link format works. Direct `.mp4` URLs, YouTube and Vimeo also work.
-3. Thumbnail: put an image in `public/media/` and set `thumbnailUrl: "/media/your-file.jpg"`. If left empty, Drive videos use Drive's automatic thumbnail.
+2. Add an entry to `featuredProjects` in `portfolio.ts` using `drive("FILE_ID")` (the ID is the long code in the file's share link). Direct `.mp4` URLs, YouTube and Vimeo also work.
+3. Set `discipline` to `"AI"` or `"Film"`.
 
 Notes:
 - A Drive **folder** link is not a video link — folder links go in `driveFolders`.
-- Drive videos play inside Google's embedded player (its own play/volume controls). Direct `.mp4` files get the site's custom play/pause and mute controls. For the showreel, direct files hosted on a CDN give the most polished result.
+- Drive videos play inside Google's embedded player. Direct `.mp4` files get the site's custom play/pause and mute controls.
 - Videos load only when a visitor presses play, so the page stays fast and no video files live in this repo.
-- The hero background needs a direct video file (`site.hero.videoUrl`); Drive cannot autoplay as a background. Until then a generated light backdrop is shown.
 
-### Placeholders
+### Thumbnails
 
-Anything not yet supplied renders as a clearly labelled placeholder frame ("… placeholder · replace in config") or a "pending" note. Search the config files for `TODO` to see everything outstanding. Case study fields left empty are hidden; ones marked `draft: true` show a "Draft — content pending" tag and are hidden from search engines.
+Before every build, `scripts/fetch-thumbs.mjs` saves a preview frame of each Drive video to `public/thumbs/<fileId>.jpg` and records its size, so thumbnails are real frames from the film, self-hosted, and each film is framed at its true aspect ratio.
+
+- **Custom thumbnail:** commit your own `public/thumbs/<fileId>.jpg` (never overwritten), or set `thumbnailUrl` on the project.
+- **No frame available:** the tile shows a designed poster card with the brand name instead, so nothing is ever empty.
+
+### Design
+
+The light glass theme lives in `src/app/globals.css` (colour tokens at the top, `.glass` panels, ambient colour). The hero headline is `site.headline` in `site.ts`; wrap a word in `*asterisks*` for the serif accent.
 
 ### Contact form
 
-Set `contact.formEndpoint` in `site.ts` to a [Formspree](https://formspree.io) form URL (free tier is fine) and submissions arrive in your inbox. Without it, the form opens the visitor's email app addressed to `contact.email`.
+`contact.formEndpoint` in `site.ts` posts enquiries to FormSubmit, which emails them to the address in the URL. The first submission triggers a one-time activation email from FormSubmit — confirm it once. Any other JSON endpoint (e.g. Formspree) also works.
 
 ## Deploy to Vercel
 

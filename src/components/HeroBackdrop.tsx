@@ -12,23 +12,22 @@ float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
 float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.03+vec2(3.1,1.7);a*=.5;}return v;}
 void main(){
   vec2 uv=gl_FragCoord.xy/r; vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
-  float T=t*.045;
-  vec2 q=vec2(fbm(p*1.3+vec2(T,-T*.6)),fbm(p*1.3+vec2(-T*.8,T)+4.2));
-  float f=fbm(p*1.6+q*1.9+vec2(0.,T*.5));
-  float beam=smoothstep(.42,.95,f);
-  vec3 warm=vec3(1.,.30,.14), cool=vec3(.80,.78,.74);
-  vec3 c=vec3(.034,.032,.030);
-  c+=warm*pow(beam,2.0)*.85*smoothstep(-.6,.7,p.x+q.y*.6);
-  c+=cool*pow(smoothstep(.5,1.,fbm(p*2.2-q*1.4+T)),3.)*.16;
-  c*=smoothstep(1.25,.25,length(p*vec2(.8,1.15)));
-  c*=mix(.55,1.,smoothstep(0.,.55,uv.y));
+  float T=t*.05;
+  vec2 q=vec2(fbm(p*1.1+vec2(T,-T*.6)),fbm(p*1.1+vec2(-T*.8,T)+4.2));
+  float f1=fbm(p*1.2+q*1.6+vec2(0.,T*.5));
+  float f2=fbm(p*1.4-q*1.3+vec2(5.2,-T*.4));
+  float f3=fbm(p*1.0+q*1.1+vec2(-3.1,T*.3)+9.);
+  vec3 c=vec3(.962,.958,.978);
+  c=mix(c,vec3(1.,.76,.64),smoothstep(.40,.90,f1)*.85*smoothstep(-.9,.6,p.x));
+  c=mix(c,vec3(.77,.74,1.),smoothstep(.45,.95,f2)*.80);
+  c=mix(c,vec3(.66,.88,1.),smoothstep(.50,1.,f3)*.70*smoothstep(.9,-.5,p.x));
+  c=mix(c,vec3(.962,.958,.978),smoothstep(.55,0.,uv.y)*.85);
   gl_FragColor=vec4(c,1.);
 }`;
 
 /**
  * Hero background. Plays site.hero.videoUrl when supplied; otherwise
- * renders a slow, generated light study (a stand-in until the
- * showreel montage is delivered — not presented as client work).
+ * renders a slow, generated wash of colour behind the glass.
  */
 export default function HeroBackdrop() {
   const canvas = useRef<HTMLCanvasElement>(null);

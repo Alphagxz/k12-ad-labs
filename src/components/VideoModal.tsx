@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import type { Project } from "@/config/portfolio";
 import { gsap, scroll, useGSAP } from "@/lib/gsap";
-import { resolveVideo } from "@/lib/video";
+import { projectAspect } from "@/lib/video";
 import Player from "./Player";
 import { CloseIcon } from "./Icons";
 
@@ -52,7 +52,7 @@ export function VideoProvider({ children }: { children: React.ReactNode }) {
   }, { dependencies: [current], scope: root });
 
   const p = current?.project;
-  const vertical = (p?.aspect ?? "9:16") !== "16:9";
+  const vertical = !!p && projectAspect(p) !== "16:9";
 
   return (
     <VideoCtx.Provider value={{ open }}>
@@ -64,15 +64,15 @@ export function VideoProvider({ children }: { children: React.ReactNode }) {
           aria-modal="true"
           aria-label={`${p.brand} — ${p.title}`}
           data-lenis-prevent
-          className="fixed inset-0 z-[80] flex flex-col bg-black/95 opacity-0"
+          className="fixed inset-0 z-[80] flex flex-col bg-[#0b0a12]/85 text-white opacity-0 backdrop-blur-2xl"
           onClick={(e) => e.target === e.currentTarget && close()}
         >
           <div className="shell flex items-center justify-between py-5">
             <div>
-              <p className="label">{p.category}</p>
+              <p className="label !text-white/60">{p.category}</p>
               <p className="mt-1 text-sm">{p.brand} — {p.title}</p>
             </div>
-            <button ref={closeBtn} type="button" onClick={close} aria-label="Close video" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-bone hover:text-ink">
+            <button ref={closeBtn} type="button" onClick={close} aria-label="Close video" className="flex h-12 w-12 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white hover:text-black">
               <CloseIcon className="h-5 w-5" />
             </button>
           </div>
@@ -85,9 +85,6 @@ export function VideoProvider({ children }: { children: React.ReactNode }) {
                 autoStart
                 className={vertical ? "!h-full max-w-[92vw]" : "w-full"}
               />
-              {resolveVideo(p.videoUrl).kind === "none" && (
-                <p className="label mt-3 text-center">Placeholder — add this project&apos;s video link in src/config/portfolio.ts</p>
-              )}
             </div>
           </div>
         </div>

@@ -3,26 +3,29 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const HUES = [18, 210, 42, 265, 150, 345, 195, 28];
+const HUES = [18, 250, 200, 330, 150, 40, 280, 190];
 
 /**
- * Image frame. With `src` it shows the image; without, it renders a
- * clearly marked placeholder "slate" so missing assets are obvious.
- * If an image fails to load, it falls back to the same slate.
+ * Image frame. Shows `src` when available; otherwise (or if the image
+ * fails to load) a designed poster card carrying the title, so a tile
+ * is never empty.
  */
 export default function Media({
   src,
   alt,
+  title,
+  subtitle,
   index = 0,
-  note = "Placeholder",
   className = "",
   sizes = "(min-width: 1024px) 33vw, 80vw",
   priority = false,
 }: {
   src?: string;
   alt: string;
+  /** Poster headline (usually the brand). */
+  title?: string;
+  subtitle?: string;
   index?: number;
-  note?: string;
   className?: string;
   sizes?: string;
   priority?: boolean;
@@ -46,23 +49,13 @@ export default function Media({
       ) : (
         <div
           role="img"
-          aria-label={`${alt} (placeholder)`}
-          className="media-img slate absolute inset-0 flex flex-col justify-between p-4"
-          style={{ ["--slate-hue" as string]: HUES[index % HUES.length] }}
+          aria-label={alt}
+          className="media-img poster absolute inset-0 flex flex-col justify-end p-[7%]"
+          style={{ ["--poster-hue" as string]: HUES[index % HUES.length] }}
         >
-          <div className="flex justify-between">
-            <span className="h-3 w-3 border-l border-t border-white/40" />
-            <span className="h-3 w-3 border-r border-t border-white/40" />
-          </div>
-          <div className="text-center">
-            <span className="display block text-[clamp(3rem,7vw,6rem)] text-white/10">{String(index + 1).padStart(2, "0")}</span>
-            <span className="label mt-2 inline-block border border-white/20 px-2 py-1 !text-[0.5625rem] !text-white/60">
-              {note} · replace in config
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span className="h-3 w-3 border-b border-l border-white/40" />
-            <span className="h-3 w-3 border-b border-r border-white/40" />
+          <div>
+            <span className="display block text-[clamp(1.5rem,3.4vw,3.2rem)] leading-[0.95] text-bone">{title ?? alt}</span>
+            {subtitle && <span className="label mt-3 block !text-bone/70">{subtitle}</span>}
           </div>
         </div>
       )}

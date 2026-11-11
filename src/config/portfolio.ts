@@ -10,11 +10,9 @@
  *     link format works, e.g.
  *       https://drive.google.com/file/d/FILE_ID/view?usp=sharing
  *     Direct .mp4/.webm URLs, YouTube and Vimeo links also work.
- *  3. `thumbnailUrl` (optional):
- *       • a file in /public, e.g. "/media/rumik-01.jpg", or
- *       • any image URL, or
- *       • leave "" → the site uses Drive's auto thumbnail for
- *         Drive videos, or a marked placeholder frame otherwise.
+ *  3. `thumbnailUrl` (optional): leave "" and a frame from the video
+ *     is saved automatically at build time. To override, use a file
+ *     in /public (e.g. "/media/soch.jpg") or any image URL.
  *
  *  A FOLDER link is not a video link. Folder links belong in
  *  `driveFolders` below — they open in Google Drive in a new tab.
@@ -32,37 +30,39 @@ export type Project = {
   thumbnailUrl: string;
   /** Video shape. "9:16" vertical (default), "16:9", "1:1" or "4:5". */
   aspect?: "9:16" | "16:9" | "1:1" | "4:5";
-  year?: string;
+  discipline: "AI" | "Film";
 };
 
 const drive = (id: string) => `https://drive.google.com/file/d/${id}/view`;
 
 /**
  * SELECTED WORK — shown in this order.
- * Thumbnails are left "" so Drive's automatic thumbnail is used; drop
- * a custom image in /public/media and set thumbnailUrl to override.
- * If a film is landscape, set aspect: "16:9" so it is framed correctly.
+ * `discipline` groups the work: "AI" or "Film".
+ * `aspect` is only a hint; the real shape is measured from the video
+ * frame at build time. Leave `thumbnailUrl` "" to use that frame.
  */
 export const featuredProjects: Project[] = [
-  { id: "pet-project", brand: "Pet Project", title: "AI Animated Brand Film", category: "Animation", videoUrl: drive("1WLHVzz0cQByB4mVKBBLnbFGJmipx4weD"), thumbnailUrl: "" },
-  { id: "cheater-scanner", brand: "Cheater Scanner", title: "AI UGC / TikTok Creative", category: "AI UGC", videoUrl: drive("1WrRulgnGmmT-_do7waXJB5vBPbmzczwK"), thumbnailUrl: "" },
-  { id: "social-catfish", brand: "Social Catfish", title: "AI UGC / Social Ad", category: "AI UGC", videoUrl: drive("148s5sBRapmuRhZ4KiQZDNSigw6c92XnR"), thumbnailUrl: "" },
-  { id: "tripsniper", brand: "TripSniper", title: "AI UGC / Travel Ad", category: "AI UGC", videoUrl: drive("1FwLraGfuwc0TKTw9JHA4LZJeTALHMxBq"), thumbnailUrl: "" },
-  { id: "moneypilot", brand: "MoneyPilot", title: "AI UGC / Performance Advertising", category: "Performance", videoUrl: drive("11SPwSTkA1KkPESnO81PGGWQtqTfOvAKn"), thumbnailUrl: "" },
-  { id: "rumik-ai", brand: "Rumik AI", title: "AI UGC / App Advertising", category: "App Advertising", videoUrl: drive("12tDyrvvbhtGMSSRdh2ocpgMJQkyTyEsg"), thumbnailUrl: "" },
-  { id: "adukale", brand: "Adukale", title: "AI Product Advertisement", category: "Product Advertising", videoUrl: drive("1ked_9FQePqzZfcdf9KFpBJQU58brrB4Z"), thumbnailUrl: "", aspect: "16:9" },
-  // Optional 8th slot (same curated folder) — uncomment to feature:
-  // { id: "cardoutpost", brand: "CardOutpost", title: "AI UGC Creative", category: "AI UGC", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
+  { id: "soch", brand: "Soch", title: "Campaign Film", category: "Brand Campaign", discipline: "Film", videoUrl: drive("1GeVFB0aeGNUDI96Euxzx5PrQWNJQANAy"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "pet-project", brand: "Pet Project", title: "Animated Brand Film", category: "AI Animation", discipline: "AI", videoUrl: drive("1WLHVzz0cQByB4mVKBBLnbFGJmipx4weD"), thumbnailUrl: "" },
+  { id: "bosch", brand: "Bosch", title: "Ride Campaign", category: "Campaign Film", discipline: "Film", videoUrl: drive("14q_9bZmS60WR231Q_9yBg_Fn9X5rsmCT"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "cheater-scanner", brand: "Cheater Scanner", title: "TikTok Creative", category: "AI UGC", discipline: "AI", videoUrl: drive("1WrRulgnGmmT-_do7waXJB5vBPbmzczwK"), thumbnailUrl: "" },
+  { id: "trunativ", brand: "TruNativ", title: "Essential Protein Launch", category: "Product Film", discipline: "Film", videoUrl: drive("1YkKlddFh30gvfDfpcdXUW6Tijm0zZpnz"), thumbnailUrl: "" },
+  { id: "moneypilot", brand: "MoneyPilot", title: "Performance Advertising", category: "AI UGC", discipline: "AI", videoUrl: drive("11SPwSTkA1KkPESnO81PGGWQtqTfOvAKn"), thumbnailUrl: "" },
+  { id: "bangalore-airport", brand: "Bangalore Airport", title: "Gifting Film", category: "Brand Film", discipline: "Film", videoUrl: drive("1CJSFOe3StbxM-gAkJKwzJaajEIVx6gFd"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "rumik-ai", brand: "Rumik AI", title: "App Advertising", category: "AI UGC", discipline: "AI", videoUrl: drive("12tDyrvvbhtGMSSRdh2ocpgMJQkyTyEsg"), thumbnailUrl: "" },
+  { id: "adukale", brand: "Adukale", title: "Product Advertisement", category: "AI Product Film", discipline: "AI", videoUrl: drive("1ked_9FQePqzZfcdf9KFpBJQU58brrB4Z"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "social-catfish", brand: "Social Catfish", title: "Social Ad", category: "AI UGC", discipline: "AI", videoUrl: drive("148s5sBRapmuRhZ4KiQZDNSigw6c92XnR"), thumbnailUrl: "" },
+  { id: "tripsniper", brand: "TripSniper", title: "Travel Ad", category: "AI UGC", discipline: "AI", videoUrl: drive("1FwLraGfuwc0TKTw9JHA4LZJeTALHMxBq"), thumbnailUrl: "" },
 ];
 
 /**
  * SHOWREEL — alternate cuts, so no film appears twice on the page.
  */
 export const showreelProjects: Project[] = [
-  { id: "reel-tripsniper", brand: "TripSniper", title: "Ad Reel 02", category: "Travel", videoUrl: drive("12OgpPbxVindbpQrSBkrH-jpo62P0CKRj"), thumbnailUrl: "" },
-  { id: "reel-moneypilot", brand: "MoneyPilot", title: "Alternate cut", category: "Performance", videoUrl: drive("1kIHi32-q40azqOlZmdrC2sLNIFJdLYPP"), thumbnailUrl: "" },
-  { id: "reel-cheater-scanner", brand: "Cheater Scanner", title: "Alternate cut", category: "AI UGC", videoUrl: drive("1s_I0RRsVfI0X9bzi14HmFZ2jneSrl6JJ"), thumbnailUrl: "" },
-  { id: "reel-cardoutpost", brand: "CardOutpost", title: "Cut 02", category: "AI UGC", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
+  { id: "reel-trunativ", brand: "TruNativ", title: "Everyday Sugar", category: "Product Film", discipline: "Film", videoUrl: drive("1BwSz4KOYznVAi5baSAmEBE_obkC5-Jhe"), thumbnailUrl: "" },
+  { id: "reel-tripsniper", brand: "TripSniper", title: "Ad Reel 02", category: "AI UGC", discipline: "AI", videoUrl: drive("12OgpPbxVindbpQrSBkrH-jpo62P0CKRj"), thumbnailUrl: "" },
+  { id: "reel-moneypilot", brand: "MoneyPilot", title: "Alternate cut", category: "AI UGC", discipline: "AI", videoUrl: drive("1kIHi32-q40azqOlZmdrC2sLNIFJdLYPP"), thumbnailUrl: "" },
+  { id: "reel-cardoutpost", brand: "CardOutpost", title: "Social Creative", category: "AI UGC", discipline: "AI", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
 ];
 
 /** Google Drive FOLDER links — open directly in Drive in a new tab. */
@@ -73,8 +73,9 @@ export const driveFolders = {
   folders: [
     { label: "AI UGC & TikTok", note: "Paid social creatives", url: "https://drive.google.com/drive/folders/1csv8j4Jc7GM73i0nRv2-mxloHx0qlqJo" },
     { label: "Animated Reels", note: "Animated short-form", url: "https://drive.google.com/drive/folders/1PFlpL5MdhwpKcpcx2z88CO55JhFW8ZlP" },
-    { label: "TruNativ", note: "Brand work", url: "https://drive.google.com/drive/folders/1iNHlMladJQWectFGyh_zS_nRoGNLuEp5" },
+    { label: "TruNativ", note: "Product films", url: "https://drive.google.com/drive/folders/1iNHlMladJQWectFGyh_zS_nRoGNLuEp5" },
     { label: "Bangalore Airport", note: "Campaign films", url: "https://drive.google.com/drive/folders/1U1GFTZ1ZV46t7HGb0CecyhYe5qp6YAM9" },
     { label: "Soch", note: "Campaign films", url: "https://drive.google.com/drive/folders/1PssE5J8aBoJ4AU5uVf_NUnDVtjgiimuz" },
+    { label: "Bosch", note: "Campaign films", url: "https://drive.google.com/drive/folders/1fKefhvWWH9-I9Z3USX66Dw6jPcYhpiM5" },
   ],
 };

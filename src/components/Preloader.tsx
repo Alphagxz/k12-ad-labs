@@ -50,7 +50,7 @@ export default function Preloader() {
     <div ref={root} className="preloader fixed inset-0 z-[100] flex flex-col justify-between bg-ink shell py-8" aria-hidden>
       <div className="flex justify-between overflow-hidden">
         <span className="pl-fade label !text-bone">K12 Ad Labs</span>
-        <span className="pl-fade label">AI-first creative production</span>
+        <span className="pl-fade label">Creative production studio</span>
       </div>
       <div>
         <div className="overflow-hidden">

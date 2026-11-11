@@ -10,36 +10,36 @@ export default function CaseStudies() {
   return (
     <section id="case-studies" className="shell py-28 md:py-40">
       <p className="label mb-4">(07) — Case studies</p>
-      <Lines lines={["Inside", "the work."]} className="display display-lg" />
+      <Lines lines={["Inside", "the *work.*"]} className="display display-lg" />
 
-      <div className="mt-16 space-y-20 md:mt-28 md:space-y-36">
+      <div className="mt-14 grid gap-5 md:mt-24 md:grid-cols-2 md:gap-6">
         {caseStudies.map((c, i) => {
-          const pIndex = featuredProjects.findIndex((p) => p.id === c.projectId);
-          const p = featuredProjects[pIndex];
-          const flip = i % 2 === 1;
+          const p = featuredProjects.find((x) => x.id === c.projectId);
           return (
-            <Link key={c.slug} href={`/work/${c.slug}`} data-cursor="VIEW" className="group grid items-end gap-8 md:grid-cols-12">
-              <div className={`overflow-hidden rounded-md md:col-span-7 ${flip ? "md:order-2 md:col-start-6" : ""}`}>
-                <div className="relative aspect-[16/11] overflow-hidden">
-                  <div data-parallax="0.08" className="absolute -inset-y-[10%] inset-x-0">
-                    <Media
-                      src={c.images[0] || (p ? resolveThumbnail(p.thumbnailUrl, p.videoUrl) : "")}
-                      alt={`${c.brand} case study`}
-                      index={i + 4}
-                      note="Case study image placeholder"
-                      className="h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
-                      sizes="(min-width: 768px) 60vw, 92vw"
-                    />
-                  </div>
+            <Link key={c.slug} href={`/work/${c.slug}`} data-cursor="VIEW" data-reveal className={`glass group block rounded-[2rem] p-2.5 ${i % 2 ? "md:mt-20" : ""}`}>
+              <div className="relative aspect-[16/11] overflow-hidden rounded-3xl">
+                <div data-parallax="0.07" className="absolute -inset-y-[9%] inset-x-0">
+                  <Media
+                    src={c.images[0] || (p ? resolveThumbnail(p) : "")}
+                    alt={`${c.brand} case study`}
+                    title={c.brand}
+                    subtitle={c.category}
+                    index={i + 4}
+                    className="h-full w-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+                    sizes="(min-width: 768px) 46vw, 92vw"
+                  />
                 </div>
+                <span className="glass-soft chip absolute left-4 top-4">Case 0{i + 1}</span>
               </div>
-              <div data-reveal className={`md:col-span-4 ${flip ? "md:order-1 md:col-start-1" : "md:col-start-9"}`}>
-                <p className="label">Case 0{i + 1} — {c.category}</p>
-                <h3 className="display display-md mt-4 transition-colors duration-500 group-hover:text-accent">{c.brand}</h3>
-                <p className="mt-6 inline-flex items-center gap-3 font-mono text-xs uppercase tracking-[0.14em]">
-                  View case study
-                  <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1" />
-                </p>
+              <div className="flex items-end justify-between gap-6 px-4 pb-4 pt-6">
+                <div>
+                  <p className="label">{c.category}</p>
+                  <h3 className="display mt-2 text-[clamp(1.8rem,3.2vw,3.2rem)] transition-colors duration-500 group-hover:text-accent">{c.brand}</h3>
+                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-mute">{c.objective}</p>
+                </div>
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-bone text-white transition-all duration-500 group-hover:bg-accent">
+                  <ArrowIcon className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </span>
               </div>
             </Link>
           );

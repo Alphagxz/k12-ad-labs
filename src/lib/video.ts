@@ -1,3 +1,11 @@
+import manifest from "@/config/thumbs.generated.json";
+import type { Project } from "@/config/portfolio";
+
+type Thumb = { src: string; w?: number; h?: number };
+const thumbs = manifest as Record<string, Thumb>;
+
+export type Aspect = "9:16" | "16:9" | "1:1" | "4:5";
+
 export type ResolvedVideo =
   | { kind: "none" }
   | { kind: "file"; src: string }
@@ -28,14 +36,31 @@ export function resolveVideo(url: string): ResolvedVideo {
   return { kind: "file", src: u };
 }
 
-/** Explicit thumbnail → Drive auto-thumbnail → "" (placeholder frame). */
-export function resolveThumbnail(thumbnailUrl: string, videoUrl: string): string {
-  if (thumbnailUrl?.trim()) return thumbnailUrl.trim();
-  const id = driveFileId(videoUrl ?? "");
-  return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w1000` : "";
+/**
+ * Thumbnail order: custom `thumbnailUrl` → frame saved at build time
+ * → Drive's live thumbnail. If none loads, a designed poster is shown.
+ */
+export function resolveThumbnail(p: Pick<Project, "thumbnailUrl" | "videoUrl">): string {
+  if (p.thumbnailUrl?.trim()) return p.thumbnailUrl.trim();
+  const id = driveFileId(p.videoUrl ?? "");
+  if (!id) return "";
+  return thumbs[id]?.src ?? `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
 }
 
-export const aspectClass: Record<string, string> = {
+/** True shape of the film: measured frame → config hint → vertical. */
+export function projectAspect(p: Pick<Project, "aspect" | "videoUrl">): Aspect {
+  const t = thumbs[driveFileId(p.videoUrl ?? "") ?? ""];
+  if (t?.w && t?.h) {
+    const r = t.w / t.h;
+    if (r > 1.25) return "16:9";
+    if (r < 0.7) return "9:16";
+    if (r < 0.9) return "4:5";
+    return "1:1";
+  }
+  return p.aspect ?? "9:16";
+}
+
+export const aspectClass: Record<Aspect, string> = {
   "9:16": "aspect-[9/16]",
   "16:9": "aspect-video",
   "1:1": "aspect-square",

@@ -19,7 +19,7 @@ export default function Home() {
     name: site.name,
     url: site.url,
     description: site.description,
-    slogan: "AI Ads That Don't Look Like AI.",
+    slogan: site.headline.join(" ").replaceAll("*", ""),
     makesOffer: services.map((s) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: s.title } })),
   };
   return (
