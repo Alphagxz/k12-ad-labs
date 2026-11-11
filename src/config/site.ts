@@ -17,8 +17,8 @@ export const site = {
   description:
     "K12 Ad Labs is a creative production studio making brand films, commercials, product films, social content and AI-powered advertising for modern brands.",
 
-  /** Figure carried over from the previous K12 Ad Labs website. */
-  stats: [{ value: "50+", label: "Ads produced" }],
+  /** Headline figure. Counts up from 0 each time it scrolls into view. */
+  stats: [{ value: "300+", label: "Ads produced" }],
 
   hero: {
     /**
