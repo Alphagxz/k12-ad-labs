@@ -64,16 +64,35 @@ export const services: Service[] = [
   },
 ];
 
-/** Brands shown in the "Selected clients" section. */
+/**
+ * Brands shown in the "Selected clients" section, taken from the
+ * project folders in the Drive portfolio. Remove or reorder freely;
+ * add `logoUrl` ("/media/logos/x.svg") to show a logo instead of type.
+ */
 export const clients: { name: string; logoUrl?: string }[] = [
   { name: "Bosch" },
-  { name: "Soch" },
+  { name: "Zomato" },
+  { name: "Swiggy × AiDash" },
+  { name: "Okta" },
   { name: "Bangalore Airport" },
+  { name: "Soch" },
+  { name: "Home Centre" },
   { name: "TruNativ" },
   { name: "Rumik AI" },
-  { name: "Phoenix Mall" },
   { name: "Pet Project" },
   { name: "Adukale" },
+  { name: "MoneyPilot" },
+  { name: "Cheater Scanner" },
+  { name: "Social Catfish" },
+  { name: "TripSniper" },
+  { name: "CardOutpost" },
+  { name: "DeepScan" },
+  { name: "Videshi Coffee" },
+  { name: "Indian Kanteen" },
+  { name: "Vyana" },
+  { name: "Cataleya" },
+  { name: "CKPC Properties" },
+  { name: "Phaco Festival" },
 ];
 
 export const about = {
