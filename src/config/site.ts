@@ -56,7 +56,7 @@ export const socials: { label: string; url: string }[] = [
 export const nav = [
   { label: "Work", href: "/#work" },
   { label: "Services", href: "/#services" },
-  { label: "Case Studies", href: "/#case-studies" },
+  { label: "Clients", href: "/#clients" },
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ];

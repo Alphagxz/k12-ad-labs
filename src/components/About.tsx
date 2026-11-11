@@ -4,7 +4,7 @@ import Lines from "./Lines";
 export default function About() {
   return (
     <section id="about" className="shell py-28 md:py-40">
-      <p className="label mb-6">(08) — About</p>
+      <p className="label mb-6">(07) — About</p>
       <Lines lines={about.headline} className="display display-lg" />
       <div className="mt-14 grid gap-10 md:mt-20 md:grid-cols-12">
         <p data-reveal className="font-serif text-3xl italic leading-tight text-accent md:col-span-4 md:text-4xl">{about.aside}</p>

@@ -1,6 +1,6 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  K12 AD LABS — INTRO, SERVICES, CLIENTS, ABOUT, CASE STUDIES
+ *  K12 AD LABS — INTRO, SERVICES, CLIENTS, ABOUT
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -52,7 +52,7 @@ export const services: Service[] = [
     title: "Social Content & Reels",
     description: "Always-on content for Reels, TikTok and Shorts — on-brand, platform-native and delivered at the volume feeds demand.",
     tags: ["Reels", "TikTok", "Shorts"],
-    projectId: "tripsniper",
+    projectId: "anim-starbucks",
     imageUrl: "",
   },
   {
@@ -107,84 +107,3 @@ export const about = {
     { title: "Performance-driven", text: "Content made to be measured, iterated and scaled." },
   ],
 };
-
-export type CaseStudy = {
-  slug: string;
-  brand: string;
-  category: string;
-  /**
-   * `draft: true` shows a "Draft — content pending" tag on the page.
-   * Set to false once the real copy is in.
-   */
-  draft: boolean;
-  introduction: string;
-  objective: string;
-  concept: string;
-  process: { title: string; text: string }[];
-  /** id of a project in portfolio.ts — its video is the "final film". */
-  projectId: string;
-  /** Supporting images: "/media/…jpg" or URLs. "" entries render marked placeholders. */
-  images: string[];
-  /** Only real, supplied figures. Leave [] and the Results block is hidden. */
-  results: { value: string; label: string }[];
-};
-
-/**
- * Copy below is carried over from the existing portfolio. Empty
- * fields ("" or []) are simply hidden on the page — fill them in
- * to add a brand introduction, process steps, images or results.
- */
-export const caseStudies: CaseStudy[] = [
-  {
-    slug: "rumik-ai",
-    brand: "Rumik AI",
-    category: "AI UGC · App Advertising",
-    draft: false,
-    introduction: "",
-    objective: "Creator-led creative for an AI app.",
-    concept: "Short-form storytelling that introduces the product in a familiar social format and keeps the message focused.",
-    process: [],
-    projectId: "rumik-ai",
-    images: [],
-    results: [],
-  },
-  {
-    slug: "moneypilot",
-    brand: "MoneyPilot",
-    category: "AI UGC · Performance Advertising",
-    draft: false,
-    introduction: "",
-    objective: "Performance-led financial product creative.",
-    concept: "Creator-style short-form storytelling with a clear opening hook and concise product messaging.",
-    process: [],
-    projectId: "moneypilot",
-    images: [],
-    results: [],
-  },
-  {
-    slug: "pet-project",
-    brand: "Pet Project",
-    category: "AI Animated Brand Film",
-    draft: false,
-    introduction: "",
-    objective: "A character-led animated brand film for a pet-care concept.",
-    concept: "A playful visual world shaped through animated scenes, a clear narrative progression and a polished final edit.",
-    process: [],
-    projectId: "pet-project",
-    images: [],
-    results: [],
-  },
-  {
-    slug: "cheater-scanner",
-    brand: "Cheater Scanner",
-    category: "AI UGC · TikTok Creative",
-    draft: false,
-    introduction: "",
-    objective: "Social-first advertising for an app-oriented service.",
-    concept: "A vertical UGC format built around an immediate hook, a concise narrative and platform-native pacing.",
-    process: [],
-    projectId: "cheater-scanner",
-    images: [],
-    results: [],
-  },
-];

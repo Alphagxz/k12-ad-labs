@@ -6,7 +6,6 @@ import MoreProjects from "@/components/MoreProjects";
 import Marquee from "@/components/Marquee";
 import Services from "@/components/Services";
 import Clients from "@/components/Clients";
-import CaseStudies from "@/components/CaseStudies";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import { services } from "@/config/content";
@@ -33,7 +32,6 @@ export default function Home() {
       <Marquee items={services.map((s) => s.title)} />
       <Services />
       <Clients />
-      <CaseStudies />
       <About />
       <Contact />
     </>

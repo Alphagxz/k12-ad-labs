@@ -19,7 +19,7 @@ Everything editable lives in `src/config/`:
 | --- | --- |
 | `site.ts` | Headline, description, hero background video, showreel order, **email, enquiry link, form endpoint, social links**, navigation |
 | `portfolio.ts` | **Featured videos** (title, brand, category, video URL, thumbnail) and **Google Drive folder links** (View All Projects + per-brand folders) |
-| `content.ts` | Intro copy, services, client list, About, case studies |
+| `content.ts` | Intro copy, services, client list, About |
 
 Edit → commit → push. Vercel redeploys automatically in about a minute.
 

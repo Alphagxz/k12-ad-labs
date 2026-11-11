@@ -20,7 +20,7 @@
  */
 
 export type Project = {
-  /** Unique id, used by the showreel and case studies. */
+  /** Unique id, used by the hero cards and services. */
   id: string;
   title: string;
   brand: string;
@@ -38,6 +38,8 @@ const drive = (id: string) => `https://drive.google.com/file/d/${id}/view`;
 /**
  * SELECTED WORK — shown in this order.
  * `discipline` groups the work: "AI" or "Film".
+ * The two "Animated Reel" entries are editorial reels about a brand,
+ * so the brand sits in `title` and is not listed as a client.
  * `aspect` is only a hint; the real shape is measured from the video
  * frame at build time. Leave `thumbnailUrl` "" to use that frame.
  */
@@ -49,10 +51,11 @@ export const featuredProjects: Project[] = [
   { id: "trunativ", brand: "TruNativ", title: "Essential Protein Launch", category: "Product Film", discipline: "Film", videoUrl: drive("1YkKlddFh30gvfDfpcdXUW6Tijm0zZpnz"), thumbnailUrl: "" },
   { id: "moneypilot", brand: "MoneyPilot", title: "Performance Advertising", category: "AI UGC", discipline: "AI", videoUrl: drive("11SPwSTkA1KkPESnO81PGGWQtqTfOvAKn"), thumbnailUrl: "" },
   { id: "bangalore-airport", brand: "Bangalore Airport", title: "Gifting Film", category: "Brand Film", discipline: "Film", videoUrl: drive("1CJSFOe3StbxM-gAkJKwzJaajEIVx6gFd"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "anim-starbucks", brand: "Animated Reel", title: "Starbucks", category: "Animation", discipline: "Film", videoUrl: drive("1t9lqova9t3KgDoS1ieG0SCAwKBHkjMRE"), thumbnailUrl: "" },
   { id: "rumik-ai", brand: "Rumik AI", title: "App Advertising", category: "AI UGC", discipline: "AI", videoUrl: drive("12tDyrvvbhtGMSSRdh2ocpgMJQkyTyEsg"), thumbnailUrl: "" },
   { id: "adukale", brand: "Adukale", title: "Product Advertisement", category: "AI Product Film", discipline: "AI", videoUrl: drive("1ked_9FQePqzZfcdf9KFpBJQU58brrB4Z"), thumbnailUrl: "", aspect: "16:9" },
+  { id: "anim-redbull", brand: "Animated Reel", title: "Red Bull", category: "Animation", discipline: "Film", videoUrl: drive("1Dk23CS9MAGFey0bPMT2BugMx_L9vMoa2"), thumbnailUrl: "" },
   { id: "social-catfish", brand: "Social Catfish", title: "Social Ad", category: "AI UGC", discipline: "AI", videoUrl: drive("148s5sBRapmuRhZ4KiQZDNSigw6c92XnR"), thumbnailUrl: "" },
-  { id: "tripsniper", brand: "TripSniper", title: "Travel Ad", category: "AI UGC", discipline: "AI", videoUrl: drive("1FwLraGfuwc0TKTw9JHA4LZJeTALHMxBq"), thumbnailUrl: "" },
 ];
 
 /**
@@ -60,7 +63,6 @@ export const featuredProjects: Project[] = [
  */
 export const showreelProjects: Project[] = [
   { id: "reel-trunativ", brand: "TruNativ", title: "Everyday Sugar", category: "Product Film", discipline: "Film", videoUrl: drive("1BwSz4KOYznVAi5baSAmEBE_obkC5-Jhe"), thumbnailUrl: "" },
-  { id: "reel-tripsniper", brand: "TripSniper", title: "Ad Reel 02", category: "AI UGC", discipline: "AI", videoUrl: drive("12OgpPbxVindbpQrSBkrH-jpo62P0CKRj"), thumbnailUrl: "" },
   { id: "reel-moneypilot", brand: "MoneyPilot", title: "Alternate cut", category: "AI UGC", discipline: "AI", videoUrl: drive("1kIHi32-q40azqOlZmdrC2sLNIFJdLYPP"), thumbnailUrl: "" },
   { id: "reel-cardoutpost", brand: "CardOutpost", title: "Social Creative", category: "AI UGC", discipline: "AI", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
 ];

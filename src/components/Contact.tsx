@@ -53,7 +53,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="shell relative overflow-hidden pb-20 pt-28 md:pt-40">
-      <p className="label mb-6">(09) — Contact</p>
+      <p className="label mb-6">(08) — Contact</p>
       <Lines lines={["Have a project", "in *mind?*"]} className="display display-xl" />
 
       <div className="mt-10 md:mt-14">
