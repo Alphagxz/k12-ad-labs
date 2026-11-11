@@ -20,7 +20,7 @@ export default function Clients() {
         ))}
       </ul>
       <p data-reveal className="mt-12 max-w-md text-lg leading-relaxed text-mute">
-        Brands across technology, retail, pet care, wellness and food trust K12 to produce their advertising.
+        Brands across technology, retail, pet care and food trust K12 to produce their advertising.
       </p>
     </section>
   );

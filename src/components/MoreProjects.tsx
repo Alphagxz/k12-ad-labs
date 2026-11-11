@@ -31,17 +31,17 @@ export default function MoreProjects() {
         </div>
 
         <ul className="md:col-span-6 md:col-start-7">
-          {driveFolders.brands.map((b, i) => {
+          {driveFolders.folders.map((b, i) => {
             const url = b.url.trim();
             const Row = url ? "a" : "div";
             return (
-              <li key={b.brand} data-reveal className="border-t border-line last:border-b">
+              <li key={b.label} data-reveal className="border-t border-line last:border-b">
                 <Row
                   {...(url ? { href: url, target: "_blank", rel: "noopener noreferrer", "data-cursor": "OPEN" } : {})}
                   className={`group flex items-center gap-6 py-6 transition-[padding] duration-500 ease-out ${url ? "hover:pl-4" : ""}`}
                 >
                   <span className="label w-8">0{i + 1}</span>
-                  <span className="display text-3xl md:text-5xl">{b.brand}</span>
+                  <span className="display text-3xl md:text-5xl">{b.label}</span>
                   <span className="label ml-auto hidden text-right sm:block">{url ? b.note : "Folder link pending"}</span>
                   <ArrowIcon className={`h-5 w-5 shrink-0 transition-transform duration-500 ${url ? "group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent" : "opacity-25"}`} />
                 </Row>

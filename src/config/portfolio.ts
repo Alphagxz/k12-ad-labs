@@ -35,30 +35,46 @@ export type Project = {
   year?: string;
 };
 
+const drive = (id: string) => `https://drive.google.com/file/d/${id}/view`;
+
 /**
- * SELECTED WORK — the 6–8 strongest ads, shown in this order.
- * TODO: every entry below is a PLACEHOLDER. Replace title / brand /
- * category and paste the real videoUrl + thumbnailUrl.
+ * SELECTED WORK — shown in this order.
+ * Thumbnails are left "" so Drive's automatic thumbnail is used; drop
+ * a custom image in /public/media and set thumbnailUrl to override.
+ * If a film is landscape, set aspect: "16:9" so it is framed correctly.
  */
 export const featuredProjects: Project[] = [
-  { id: "project-01", title: "Project title 01", brand: "Rumik AI", category: "AI UGC", videoUrl: "", thumbnailUrl: "" },
-  { id: "project-02", title: "Project title 02", brand: "Phoenix Mall", category: "AI Commercial", videoUrl: "", thumbnailUrl: "" },
-  { id: "project-03", title: "Project title 03", brand: "Pet Project", category: "Product Advertising", videoUrl: "", thumbnailUrl: "" },
-  { id: "project-04", title: "Project title 04", brand: "Cannazo", category: "Performance Advertising", videoUrl: "", thumbnailUrl: "" },
-  { id: "project-05", title: "Project title 05", brand: "Adukale", category: "Social Media Creative", videoUrl: "", thumbnailUrl: "" },
-  { id: "project-06", title: "Project title 06", brand: "Rumik AI", category: "AI Commercial", videoUrl: "", thumbnailUrl: "" },
+  { id: "pet-project", brand: "Pet Project", title: "AI Animated Brand Film", category: "Animation", videoUrl: drive("149cOzx2mpe3qYnBV9ULMFPkgzRm0a4PV"), thumbnailUrl: "" },
+  { id: "cheater-scanner", brand: "Cheater Scanner", title: "AI UGC / TikTok Creative", category: "AI UGC", videoUrl: drive("1ifpuezEDZw9BcaF8ft44fJ3wXEMf5jSC"), thumbnailUrl: "" },
+  { id: "social-catfish", brand: "Social Catfish", title: "AI UGC / Social Ad", category: "AI UGC", videoUrl: drive("148s5sBRapmuRhZ4KiQZDNSigw6c92XnR"), thumbnailUrl: "" },
+  { id: "tripsniper", brand: "TripSniper", title: "AI UGC / Travel Ad", category: "AI UGC", videoUrl: drive("1FwLraGfuwc0TKTw9JHA4LZJeTALHMxBq"), thumbnailUrl: "" },
+  { id: "moneypilot", brand: "MoneyPilot", title: "AI UGC / Performance Advertising", category: "Performance", videoUrl: drive("1CHrzdXKnb2npQjFpcmT3pngiVWlyF68x"), thumbnailUrl: "" },
+  { id: "rumik-ai", brand: "Rumik AI", title: "AI UGC / App Advertising", category: "App Advertising", videoUrl: drive("1OV49BeFuOrlGVrtZQ9Rfb7wR5Ev9ylek"), thumbnailUrl: "" },
+  { id: "adukale", brand: "Adukale", title: "Khara Chakkli", category: "Product Advertising", videoUrl: drive("1ykQd-kXfViu6EAbjjlr74ImxkxCV_NJu"), thumbnailUrl: "" },
+  // Optional 8th slot (same curated folder) — uncomment to feature:
+  // { id: "cardoutpost", brand: "CardOutpost", title: "AI UGC Creative", category: "AI UGC", videoUrl: drive("1dh_VR3euRFMrkR40bbyr_NC8wIHUESxf"), thumbnailUrl: "" },
 ];
 
-/** Google Drive FOLDER links — open directly in Drive. */
+/**
+ * SHOWREEL — alternate cuts, so no film appears twice on the page.
+ */
+export const showreelProjects: Project[] = [
+  { id: "reel-tripsniper", brand: "TripSniper", title: "Ad Reel 02", category: "Travel", videoUrl: drive("12OgpPbxVindbpQrSBkrH-jpo62P0CKRj"), thumbnailUrl: "" },
+  { id: "reel-moneypilot", brand: "MoneyPilot", title: "Cut v43", category: "Performance", videoUrl: drive("1YHxERJgB8-zig81genq7M9ww5kQ9jt9I"), thumbnailUrl: "" },
+  { id: "reel-cheater-scanner", brand: "Cheater Scanner", title: "Alternate cut", category: "AI UGC", videoUrl: drive("1klx6qPqZecrtn1ZO2ov0CDqwyapxK_u_"), thumbnailUrl: "" },
+  { id: "reel-cardoutpost", brand: "CardOutpost", title: "Cut 02", category: "AI UGC", videoUrl: drive("1dh_VR3euRFMrkR40bbyr_NC8wIHUESxf"), thumbnailUrl: "" },
+];
+
+/** Google Drive FOLDER links — open directly in Drive in a new tab. */
 export const driveFolders = {
-  /** "VIEW ALL PROJECTS" button. TODO: paste the main portfolio folder link. */
-  allProjects: "",
-  /** Brand-specific folders. Rows with an empty url show as "link pending". */
-  brands: [
-    { brand: "Rumik AI", note: "AI UGC & commercials", url: "" },
-    { brand: "Phoenix Mall", note: "Campaign films", url: "" },
-    { brand: "Pet Project", note: "Product advertising", url: "" },
-    { brand: "Cannazo", note: "Performance creatives", url: "" },
-    { brand: "Adukale", note: "Social media creatives", url: "" },
+  /** "VIEW ALL PROJECTS" button. */
+  allProjects: "https://drive.google.com/drive/folders/1z2ruZlJkq4eFj_iJltS8JJs1gzDZzf12",
+  /** Rows in the More Projects list. Rows with an empty url show as "link pending". */
+  folders: [
+    { label: "AI UGC & TikTok", note: "Paid social creatives", url: "https://drive.google.com/drive/folders/1csv8j4Jc7GM73i0nRv2-mxloHx0qlqJo" },
+    { label: "Animated Reels", note: "Animated short-form", url: "https://drive.google.com/drive/folders/1PFlpL5MdhwpKcpcx2z88CO55JhFW8ZlP" },
+    { label: "TruNativ", note: "Brand work", url: "https://drive.google.com/drive/folders/1iNHlMladJQWectFGyh_zS_nRoGNLuEp5" },
+    { label: "Bangalore Airport", note: "Campaign films", url: "https://drive.google.com/drive/folders/1U1GFTZ1ZV46t7HGb0CecyhYe5qp6YAM9" },
+    { label: "Soch", note: "Campaign films", url: "https://drive.google.com/drive/folders/1PssE5J8aBoJ4AU5uVf_NUnDVtjgiimuz" },
   ],
 };

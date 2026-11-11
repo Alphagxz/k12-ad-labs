@@ -31,13 +31,6 @@ export const site = {
     posterUrl: "",
   },
 
-  showreel: {
-    /**
-     * IDs of projects (from portfolio.ts) to play in the showreel
-     * section, in order. Each video appears once.
-     */
-    projectIds: ["project-01", "project-02", "project-03", "project-04"],
-  },
 } as const;
 
 export const contact = {

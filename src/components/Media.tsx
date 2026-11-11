@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 const HUES = [18, 210, 42, 265, 150, 345, 195, 28];
@@ -5,6 +8,7 @@ const HUES = [18, 210, 42, 265, 150, 345, 195, 28];
 /**
  * Image frame. With `src` it shows the image; without, it renders a
  * clearly marked placeholder "slate" so missing assets are obvious.
+ * If an image fails to load, it falls back to the same slate.
  */
 export default function Media({
   src,
@@ -23,10 +27,11 @@ export default function Media({
   sizes?: string;
   priority?: boolean;
 }) {
+  const [failed, setFailed] = useState(false);
   const remote = !!src && /^https?:\/\//.test(src);
   return (
     <div className={`relative overflow-hidden bg-coal ${className}`}>
-      {src ? (
+      {src && !failed ? (
         <Image
           src={src}
           alt={alt}
@@ -35,6 +40,7 @@ export default function Media({
           priority={priority}
           unoptimized={remote}
           referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
           className="media-img object-cover"
         />
       ) : (

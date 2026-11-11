@@ -1,15 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { featuredProjects } from "@/config/portfolio";
-import { site } from "@/config/site";
+import { showreelProjects } from "@/config/portfolio";
 import { gsap, useGSAP, MOTION_OK } from "@/lib/gsap";
 import Player from "./Player";
 
-// De-duplicated list of reel videos, in configured order.
-const reel = [...new Set<string>(site.showreel.projectIds)]
-  .map((id) => featuredProjects.find((p) => p.id === id))
-  .filter((p): p is NonNullable<typeof p> => !!p);
+const reel = showreelProjects;
 
 export default function Showreel() {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +29,6 @@ export default function Showreel() {
 
   if (!reel.length) return null;
   const current = reel[active];
-  const globalIndex = featuredProjects.indexOf(current);
 
   return (
     <section ref={root} id="showreel" className="relative h-[100svh] min-h-[640px]" aria-label="Showreel">
@@ -48,7 +43,7 @@ export default function Showreel() {
             <Player
               key={current.id}
               project={current}
-              index={globalIndex}
+              index={active}
               autoStart={touched}
               className="h-full max-h-[78svh] lg:h-[78svh]"
             />
