@@ -37,7 +37,7 @@ Notes:
 
 ### Placeholders
 
-Anything not yet supplied renders as a clearly labelled placeholder frame ("… placeholder · replace in config") or a "pending" note. Search the config files for `TODO` to see everything outstanding. Case studies marked `draft: true` show a "Draft — content pending" tag and are hidden from search engines.
+Anything not yet supplied renders as a clearly labelled placeholder frame ("… placeholder · replace in config") or a "pending" note. Search the config files for `TODO` to see everything outstanding. Case study fields left empty are hidden; ones marked `draft: true` show a "Draft — content pending" tag and are hidden from search engines.
 
 ### Contact form
 

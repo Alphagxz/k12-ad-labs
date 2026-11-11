@@ -44,15 +44,15 @@ const drive = (id: string) => `https://drive.google.com/file/d/${id}/view`;
  * If a film is landscape, set aspect: "16:9" so it is framed correctly.
  */
 export const featuredProjects: Project[] = [
-  { id: "pet-project", brand: "Pet Project", title: "AI Animated Brand Film", category: "Animation", videoUrl: drive("149cOzx2mpe3qYnBV9ULMFPkgzRm0a4PV"), thumbnailUrl: "" },
-  { id: "cheater-scanner", brand: "Cheater Scanner", title: "AI UGC / TikTok Creative", category: "AI UGC", videoUrl: drive("1ifpuezEDZw9BcaF8ft44fJ3wXEMf5jSC"), thumbnailUrl: "" },
+  { id: "pet-project", brand: "Pet Project", title: "AI Animated Brand Film", category: "Animation", videoUrl: drive("1WLHVzz0cQByB4mVKBBLnbFGJmipx4weD"), thumbnailUrl: "" },
+  { id: "cheater-scanner", brand: "Cheater Scanner", title: "AI UGC / TikTok Creative", category: "AI UGC", videoUrl: drive("1WrRulgnGmmT-_do7waXJB5vBPbmzczwK"), thumbnailUrl: "" },
   { id: "social-catfish", brand: "Social Catfish", title: "AI UGC / Social Ad", category: "AI UGC", videoUrl: drive("148s5sBRapmuRhZ4KiQZDNSigw6c92XnR"), thumbnailUrl: "" },
   { id: "tripsniper", brand: "TripSniper", title: "AI UGC / Travel Ad", category: "AI UGC", videoUrl: drive("1FwLraGfuwc0TKTw9JHA4LZJeTALHMxBq"), thumbnailUrl: "" },
-  { id: "moneypilot", brand: "MoneyPilot", title: "AI UGC / Performance Advertising", category: "Performance", videoUrl: drive("1CHrzdXKnb2npQjFpcmT3pngiVWlyF68x"), thumbnailUrl: "" },
-  { id: "rumik-ai", brand: "Rumik AI", title: "AI UGC / App Advertising", category: "App Advertising", videoUrl: drive("1OV49BeFuOrlGVrtZQ9Rfb7wR5Ev9ylek"), thumbnailUrl: "" },
-  { id: "adukale", brand: "Adukale", title: "Khara Chakkli", category: "Product Advertising", videoUrl: drive("1ykQd-kXfViu6EAbjjlr74ImxkxCV_NJu"), thumbnailUrl: "" },
+  { id: "moneypilot", brand: "MoneyPilot", title: "AI UGC / Performance Advertising", category: "Performance", videoUrl: drive("11SPwSTkA1KkPESnO81PGGWQtqTfOvAKn"), thumbnailUrl: "" },
+  { id: "rumik-ai", brand: "Rumik AI", title: "AI UGC / App Advertising", category: "App Advertising", videoUrl: drive("12tDyrvvbhtGMSSRdh2ocpgMJQkyTyEsg"), thumbnailUrl: "" },
+  { id: "adukale", brand: "Adukale", title: "AI Product Advertisement", category: "Product Advertising", videoUrl: drive("1ked_9FQePqzZfcdf9KFpBJQU58brrB4Z"), thumbnailUrl: "", aspect: "16:9" },
   // Optional 8th slot (same curated folder) — uncomment to feature:
-  // { id: "cardoutpost", brand: "CardOutpost", title: "AI UGC Creative", category: "AI UGC", videoUrl: drive("1dh_VR3euRFMrkR40bbyr_NC8wIHUESxf"), thumbnailUrl: "" },
+  // { id: "cardoutpost", brand: "CardOutpost", title: "AI UGC Creative", category: "AI UGC", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
 ];
 
 /**
@@ -60,9 +60,9 @@ export const featuredProjects: Project[] = [
  */
 export const showreelProjects: Project[] = [
   { id: "reel-tripsniper", brand: "TripSniper", title: "Ad Reel 02", category: "Travel", videoUrl: drive("12OgpPbxVindbpQrSBkrH-jpo62P0CKRj"), thumbnailUrl: "" },
-  { id: "reel-moneypilot", brand: "MoneyPilot", title: "Cut v43", category: "Performance", videoUrl: drive("1YHxERJgB8-zig81genq7M9ww5kQ9jt9I"), thumbnailUrl: "" },
-  { id: "reel-cheater-scanner", brand: "Cheater Scanner", title: "Alternate cut", category: "AI UGC", videoUrl: drive("1klx6qPqZecrtn1ZO2ov0CDqwyapxK_u_"), thumbnailUrl: "" },
-  { id: "reel-cardoutpost", brand: "CardOutpost", title: "Cut 02", category: "AI UGC", videoUrl: drive("1dh_VR3euRFMrkR40bbyr_NC8wIHUESxf"), thumbnailUrl: "" },
+  { id: "reel-moneypilot", brand: "MoneyPilot", title: "Alternate cut", category: "Performance", videoUrl: drive("1kIHi32-q40azqOlZmdrC2sLNIFJdLYPP"), thumbnailUrl: "" },
+  { id: "reel-cheater-scanner", brand: "Cheater Scanner", title: "Alternate cut", category: "AI UGC", videoUrl: drive("1s_I0RRsVfI0X9bzi14HmFZ2jneSrl6JJ"), thumbnailUrl: "" },
+  { id: "reel-cardoutpost", brand: "CardOutpost", title: "Cut 02", category: "AI UGC", videoUrl: drive("1ZHcUuSf87pcYbcMDW23GUhbC10LJyCkk"), thumbnailUrl: "" },
 ];
 
 /** Google Drive FOLDER links — open directly in Drive in a new tab. */

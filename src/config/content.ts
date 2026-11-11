@@ -96,55 +96,62 @@ export type CaseStudy = {
   results: { value: string; label: string }[];
 };
 
-const PROCESS_TEMPLATE = [
-  { title: "Brief & strategy", text: "TODO: how the brief, audience and angles were defined." },
-  { title: "Creative development", text: "TODO: scripting, storyboards and look development." },
-  { title: "AI production", text: "TODO: generation, direction and iteration workflow." },
-  { title: "Edit & delivery", text: "TODO: edit, sound, grade and final formats delivered." },
-];
-
 /**
- * TODO: the copy below is PLACEHOLDER text awaiting real project
- * details. Nothing here is presented as a client result.
+ * Copy below is carried over from the existing portfolio. Empty
+ * fields ("" or []) are simply hidden on the page — fill them in
+ * to add a brand introduction, process steps, images or results.
  */
 export const caseStudies: CaseStudy[] = [
   {
     slug: "rumik-ai",
     brand: "Rumik AI",
-    category: "AI UGC Production",
-    draft: true,
-    introduction: "TODO: one or two sentences introducing Rumik AI and what they do.",
-    objective: "TODO: what the campaign needed to achieve.",
-    concept: "TODO: the creative idea behind the work.",
-    process: PROCESS_TEMPLATE,
+    category: "AI UGC · App Advertising",
+    draft: false,
+    introduction: "",
+    objective: "Creator-led creative for an AI app.",
+    concept: "Short-form storytelling that introduces the product in a familiar social format and keeps the message focused.",
+    process: [],
     projectId: "rumik-ai",
-    images: ["", "", ""],
+    images: [],
     results: [],
   },
   {
     slug: "moneypilot",
     brand: "MoneyPilot",
-    category: "Performance Advertising",
-    draft: true,
-    introduction: "TODO: one or two sentences introducing MoneyPilot.",
-    objective: "TODO: what the campaign needed to achieve.",
-    concept: "TODO: the creative idea behind the work.",
-    process: PROCESS_TEMPLATE,
+    category: "AI UGC · Performance Advertising",
+    draft: false,
+    introduction: "",
+    objective: "Performance-led financial product creative.",
+    concept: "Creator-style short-form storytelling with a clear opening hook and concise product messaging.",
+    process: [],
     projectId: "moneypilot",
-    images: ["", "", ""],
+    images: [],
     results: [],
   },
   {
     slug: "pet-project",
     brand: "Pet Project",
     category: "AI Animated Brand Film",
-    draft: true,
-    introduction: "TODO: one or two sentences introducing Pet Project.",
-    objective: "TODO: what the campaign needed to achieve.",
-    concept: "TODO: the creative idea behind the work.",
-    process: PROCESS_TEMPLATE,
+    draft: false,
+    introduction: "",
+    objective: "A character-led animated brand film for a pet-care concept.",
+    concept: "A playful visual world shaped through animated scenes, a clear narrative progression and a polished final edit.",
+    process: [],
     projectId: "pet-project",
-    images: ["", "", ""],
+    images: [],
+    results: [],
+  },
+  {
+    slug: "cheater-scanner",
+    brand: "Cheater Scanner",
+    category: "AI UGC · TikTok Creative",
+    draft: false,
+    introduction: "",
+    objective: "Social-first advertising for an app-oriented service.",
+    concept: "A vertical UGC format built around an immediate hook, a concise narrative and platform-native pacing.",
+    process: [],
+    projectId: "cheater-scanner",
+    images: [],
     results: [],
   },
 ];

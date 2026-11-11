@@ -42,7 +42,7 @@ export default async function CaseStudyPage({ params }: Props) {
     { label: "The brand", text: c.introduction },
     { label: "Objective", text: c.objective },
     { label: "Creative concept", text: c.concept },
-  ];
+  ].filter((b) => b.text.trim());
 
   return (
     <article>
@@ -70,6 +70,7 @@ export default async function CaseStudyPage({ params }: Props) {
         ))}
       </section>
 
+      {c.process.length > 0 && (
       <section className="shell border-t border-line py-24 md:py-36">
         <p className="label mb-4">Production process</p>
         <Lines lines={["How it", "was made."]} className="display display-lg" />
@@ -83,6 +84,7 @@ export default async function CaseStudyPage({ params }: Props) {
           ))}
         </ol>
       </section>
+      )}
 
       {project && (
         <section className="bg-ash py-24 md:py-36">
